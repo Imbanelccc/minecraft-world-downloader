@@ -5,7 +5,7 @@ on:
     inputs:
       ref:
         description: "Branche ou tag à compiler"
-        default: "main"
+        default: "master"
 
 jobs:
   build:

@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: "Tag ou branche à compiler"
-        default: "v1.9"
+        description: "Branche ou tag à compiler"
+        default: "main"
 
 jobs:
   build:

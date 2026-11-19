@@ -1,0 +1,29 @@
+name: Build maison
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Tag ou branche à compiler"
+        default: "v1.9"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Compiler
+        run: mvn -B package -DskipTests
+      - name: Empreinte SHA-256
+        run: sha256sum target/*.jar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: world-downloader-maison
+          path: target/*.jar
